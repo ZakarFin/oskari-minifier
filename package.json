@@ -1,0 +1,16 @@
+{
+  "name": "Zakar",
+  "version": "0.0.0",
+  "description": "Compiler for Oskari applications",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "keywords": [
+    "oskari",
+    "nls"
+  ],
+  "author": "Sami Mäkinen",
+  "license": "BSD"
+}
