@@ -1,8 +1,13 @@
 {
   "name": "Zakar",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Compiler for Oskari applications",
   "main": "index.js",
+  "dependencies" : {
+    "uglify-js" : ">=2.2.1",
+    "uglifycss" : ">=0.0.5",
+    "jshint" : ">=0.9.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

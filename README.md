@@ -3,7 +3,8 @@ oskari-minifier
 
 NodeJS module for interpreting nls-oskari projects startupsequences and minifying the set of files defined in it to a single JS file and CSS file.
 
-Run with "node index.js <path to appSetup file>
+1) Install dependencies with "npm -d install".
+2) Run with "node index.js <path to appSetup file>
 Writes 3 files:
 * oskari.js = compiled source based on appsetup
 * oskari.css = compiled css based on appsetup
