@@ -15,9 +15,14 @@ function OskariParser() {
             bundleSequence.push(component);
             var bundleDeps = bundle.metadata['Import-Bundle'];
             for (var id in bundleDeps) {
+                var bundleBasePath = basePath;
                 // "openlayers-default-theme" : { "bundlePath" : "../../../packages/openlayers/bundle/" },
                 var bundlePath = bundleDeps[id].bundlePath;
-                var normalizedPath = path.resolve(basePath, bundlePath);
+                if(bundlePath.indexOf('/') === 0) {
+                    bundlePath = '.' + bundlePath;
+                    bundleBasePath = '.';
+                }
+                var normalizedPath = path.resolve(bundleBasePath, bundlePath);
                 component.dependencies.push(this.handleBundle(id, normalizedPath));
                 //validateJS(content, wholePath);
             }
@@ -41,7 +46,12 @@ function OskariParser() {
         var scripts = this.findArray(content, 'scripts', bundlePath);
         for (var j = 0; j < scripts.length; ++j) {
             var implFile = scripts[j];
-            var normalizedImplPath = path.resolve(relativePath, implFile.src);
+            var fileRelativePath = relativePath;
+            if(implFile.src.indexOf('/') === 0) {
+                implFile.src = '.' + implFile.src;
+                fileRelativePath = '.';
+            }
+            var normalizedImplPath = path.resolve(fileRelativePath, implFile.src);
             if (implFile.type == "text/javascript") {
                 bundleDef.javascript.push(normalizedImplPath);
                 //files.push(normalizedImplPath);
@@ -61,7 +71,12 @@ function OskariParser() {
         for (var j = 0; j < locales.length; ++j) {
             var locFile = locales[j];
             var lang = locFile.lang;
-            var normalizedImplPath = path.resolve(relativePath, locFile.src);
+            var fileRelativePath = relativePath;
+            if(locFile.src.indexOf('/') === 0) {
+                locFile.src = '.' + locFile.src;
+                fileRelativePath = '.';
+            }
+            var normalizedImplPath = path.resolve(fileRelativePath, locFile.src);
             if (!lang) {
                 if (!bundleDef.locales.all) {
                     bundleDef.locales.all = [];
