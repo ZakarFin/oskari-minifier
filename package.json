@@ -1,6 +1,6 @@
 {
   "name": "Zakar",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Compiler for Oskari applications",
   "main": "index.js",
   "dependencies" : {
