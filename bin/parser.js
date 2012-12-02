@@ -1,10 +1,16 @@
 var fs = require('fs');
 var path = require('path');
 
-module.exports = OskariParser;
+module.exports = new OskariParser();
 function OskariParser() {
 
-    this.getComponents = function(data, basePath) {
+    this.getComponents = function(appSetupFile) {
+        
+        var appSetupData = fs.readFileSync(appSetupFile,'utf8');
+        var data = JSON.parse(appSetupData);
+        data = data.startupSequence;
+        var basePath = path.dirname(appSetupFile);
+        
         var bundleSequence = [];
         for (var i = 0; i < data.length; ++i) {
             var bundle = data[i];
