@@ -5,7 +5,8 @@ NodeJS module for interpreting nls-oskari projects startupsequences and minifyin
 
 1) Install dependencies with "npm -d install".
 
-2) Run with "node index.js <path to appSetup file>
+2) Run with "node index.js [path to appSetup file]
+
 Writes files to the working directory:
 * oskari.js = compiled source based on appsetup
 * oskari.css = compiled css based on appsetup
