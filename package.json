@@ -6,7 +6,8 @@
   "dependencies" : {
     "uglify-js" : ">=2.2.1",
     "uglifycss" : ">=0.0.5",
-    "jshint" : ">=0.9.1"
+    "jshint" : ">=0.9.1",
+    "yuidoc" : ">=0.3.35"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

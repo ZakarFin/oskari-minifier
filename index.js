@@ -1,6 +1,6 @@
 var arguments = process.argv.splice(2);
-if (arguments.length < 2) {
-    console.log('Usage: node index.js [compile | validate] <path to appsetup.json>');
+if (arguments.length < 1) {
+    console.log('Usage: node index.js [compile | validate | docs] <path to appsetup.json>');
     return;
 } 
 var actionHandler = require('./bin/action_' + arguments[0]);
@@ -8,6 +8,15 @@ if(!actionHandler || !actionHandler.handle) {
     console.log('Invalid action, no handler for action ' + arguments[0]);
     return;
 }
+if(arguments[0] == 'docs') {
+    // docs dont use appsetup
+    actionHandler.handle(processedAppSetup);
+    return;
+}
+else if(arguments.length < 1) {
+    console.log('Usage: node index.js [compile | validate | docs] <path to appsetup.json>');
+    return;
+} 
 
 var parser = require('./bin/parser');
 

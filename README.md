@@ -20,3 +20,7 @@ Validate writes files to the 'validation' directory:
 You can include the oskari.js and the wanted oskari_lang_*.js like any JavaScript file to 
 an HTML page with the oskari application and call Oskari.setPreloaded(true); before calling 
 Oskari.app.startApplication(); to use the compiled version of the code.
+
+BETA) JSDoc generating with "node index.js docs" - assumes source is found under ./oskari and
+tries to generate docs from ./oskari/bundles to ./docs folder. Docs not currently generated correctly, 
+might be a line-encoding issue.
