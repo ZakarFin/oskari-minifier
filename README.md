@@ -24,3 +24,6 @@ Oskari.app.startApplication(); to use the compiled version of the code.
 BETA) JSDoc generating with "node index.js docs" - assumes source is found under ./oskari and
 tries to generate docs from ./oskari/bundles to ./docs folder. Docs not currently generated correctly, 
 might be a line-encoding issue.
+
+BETA) Test-runner with "node index.js test [path to appSetup file] - assumes source is found under ./oskari and
+tries to setup a browser-like environment to run some Jasmine tests for Oskari classes
