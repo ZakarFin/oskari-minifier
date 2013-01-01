@@ -35,13 +35,13 @@ function TestAction() {
           //scripts: ["http://code.jquery.com/jquery.js"],
           src: [oskariLoader, jQuerySrc],
           done: function (errors, window) {
-            me.runTests(window, processedAppSetup);
+            me.startupOskari(window, processedAppSetup);
           }
         });
     }
     
-    this.runTests = function(window, processedAppSetup) {
-        
+    this.startupOskari = function(window, processedAppSetup) {
+        var me = this;
         //vm.runInThisContext(oskariLoader, logFile);
         // loop appsetup files
         /*
@@ -70,11 +70,38 @@ function TestAction() {
                 vm.runInContext(bundleCode, context, logFile);
                 //vm.runInThisContext(bundleCode, logFile);
             }
+            var langfiles = {};
+            var deps = processedAppSetup[j].dependencies;
+            for (var i = 0; i < deps.length; ++i) {
+                for (var lang in deps[i].locales) {
+                    if(lang == 'all' || lang == 'fi') {
+                        console.log(deps[i].locales[lang][0]);
+                        var localization = fs.readFileSync(deps[i].locales[lang][0]).toString();
+                        vm.runInContext(localization, context, logFile);
+                    }
+                }
+            }
         }
+        
+        
         for(var key in context) {
             global[key] = context[key];
         }
-        //var Oskari = context.Oskari;
+        
+        // bypass timeouts as they break jsdom
+        var setTimeoutOriginalImpl = global.setTimeout;
+        global.setTimeout = function(cb, time) {
+            console.log('Mock timeout with time:' + time);
+            cb();
+/*            if(time == 0) {
+                cb();
+            }
+            else {
+                setTimeoutOriginalImpl(cb, time);
+            }
+            */
+        }
+        // TODO: maybe reinstate the original setTimeout implementation after startup?
         
         // FIXME: do this better than this
         var appSetup = {
@@ -87,14 +114,19 @@ function TestAction() {
         Oskari.setPreloaded(true);
         //Oskari.setDebugMode(true);
         
-        // FIXME: calls to setTimeout breaks jsdom
         Oskari.setLang('fi');
         app.setApplicationSetup(appSetup);
         app.setConfiguration(configData);
         app.startApplication(function(startupInfos) {
+            // all bundles have been started
             console.log('started');
-            // all bundles have been loaded
+            me.runTests();
         });
+        
+    }
+    this.runTests = function() {
+        console.log('Running tests');
+        console.log(Oskari.$('sandbox'));
         
         /*
         jasmine.executeSpecsInFolder(__dirname + '/specs', function(runner, log){  
