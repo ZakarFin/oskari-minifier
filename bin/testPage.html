@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>test page</title>
+
+        <style type="text/css">
+            @media screen {
+                body {
+                    margin: 0;
+                    padding: 0;
+                }
+                #mapdiv {
+                    width: 100%;
+                }
+                #maptools {
+                    background-color: #333438;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    width: 153px;
+                    z-index: 2;
+                }
+                #contentMap {
+                    height: 100%;
+                    margin-left: 153px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+
+        <nav id="maptools">
+            <div id="loginbar"></div>
+            <div id="menubar"></div>
+            <div id="divider"></div>
+            <div id="toolbar"></div>
+        </nav>
+        <div id="contentMap">
+            <div id="mapdiv"></div>
+        </div>
+
+    </body>
+</html>

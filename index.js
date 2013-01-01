@@ -1,6 +1,6 @@
 var arguments = process.argv.splice(2);
 if (arguments.length < 1) {
-    console.log('Usage: node index.js [compile | validate | docs] <path to appsetup.json>');
+    console.log('Usage: node index.js [compile | validate | test | docs] <path to appsetup.json>');
     return;
 } 
 var actionHandler = require('./bin/action_' + arguments[0]);
@@ -10,11 +10,11 @@ if(!actionHandler || !actionHandler.handle) {
 }
 if(arguments[0] == 'docs') {
     // docs dont use appsetup
-    actionHandler.handle(processedAppSetup);
+    actionHandler.handle();
     return;
 }
 else if(arguments.length < 1) {
-    console.log('Usage: node index.js [compile | validate | docs] <path to appsetup.json>');
+    console.log('Usage: node index.js [compile | validate | test | docs] <path to appsetup.json>');
     return;
 } 
 
@@ -30,4 +30,5 @@ for (var j = 0; j < processedAppSetup.length; ++j) {
 }
 if(unknownfiles.length != 0) {
     console.log('Appsetup referenced types of files that couldn\'t be handled: ' + unknownfiles);
+};
 }

@@ -33,6 +33,7 @@ function OskariParser() {
                 //validateJS(content, wholePath);
             }
         }
+        bundleSequence[0].originalData = data;
         return bundleSequence;
     }
     this.handleBundle = function(id, basepath) {
