@@ -31,4 +31,3 @@ for (var j = 0; j < processedAppSetup.length; ++j) {
 if(unknownfiles.length != 0) {
     console.log('Appsetup referenced types of files that couldn\'t be handled: ' + unknownfiles);
 };
-}
