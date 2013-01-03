@@ -22,7 +22,7 @@ var parser = require('./bin/parser');
 
 var appSetupFile = arguments[1]; 
 var processedAppSetup = parser.getComponents(appSetupFile);
-actionHandler.handle(processedAppSetup);
+actionHandler.handle(processedAppSetup, arguments.splice(2));
 
 var unknownfiles = [];
 for (var j = 0; j < processedAppSetup.length; ++j) {
@@ -30,5 +30,4 @@ for (var j = 0; j < processedAppSetup.length; ++j) {
 }
 if(unknownfiles.length != 0) {
     console.log('Appsetup referenced types of files that couldn\'t be handled: ' + unknownfiles);
-};
 }

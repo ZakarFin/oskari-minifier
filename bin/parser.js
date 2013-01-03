@@ -30,7 +30,6 @@ function OskariParser() {
                 }
                 var normalizedPath = path.resolve(bundleBasePath, bundlePath);
                 component.dependencies.push(this.handleBundle(id, normalizedPath));
-                //validateJS(content, wholePath);
             }
         }
         bundleSequence[0].originalData = data;
