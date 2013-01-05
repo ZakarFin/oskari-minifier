@@ -46,9 +46,9 @@ Tests are run with https://github.com/mhevery/jasmine-node/.
  Example:
  Run "node index.js test oskari/applications/sample/mythird/appsetup.json oskari/applications/sample/mythird/config.json"
 
-Docs (BETA)
+Docs
 ========
- Generates YUIDoc files to the 'docs' directory, but is still in experimental beta.
- Assumes code to document is under ./oskari/ directory. Docs not currently generated correctly. 
- Uses http://yui.github.com/yuidoc/
+ Generates YUIDoc files to the 'docs' directory.
+ Assumes code to document is under ./oskari/ directory.
+ Uses http://yui.github.com/yuidoc/ with some overriding on comment parsing.
 
