@@ -36,6 +36,6 @@ function CompileAction() {
         for (var j = 0; j < processedAppSetup.length; ++j) {
             cssfiles = cssfiles.concat(parser.getFilesForComponent(processedAppSetup[j], 'css'));
         }
-        minifier.minifyCSS(cssfiles, compiledDir + 'oskari.css');
+        minifier.minifyCSSFiles(cssfiles, compiledDir + 'oskari.css');
     }
 }

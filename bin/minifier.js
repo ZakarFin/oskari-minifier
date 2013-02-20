@@ -4,8 +4,19 @@ var cssPacker = require('uglifycss') ;
 
 module.exports = new OskariMinifier();
 function OskariMinifier() {
+    
+    this.minifyCSS = function(css, outputFile) {
 
-    this.minifyCSS = function(files, outputFile) {
+        var packed = cssPacker.processString(css);
+
+        fs.writeFile(outputFile, packed, function(err) {
+            if (err) {
+                log('Error writing packed CSS: ' + err);
+            }
+        });
+    }
+
+    this.minifyCSSFiles = function(files, outputFile) {
 
         var value = '';
         for (var i = 0; i < files.length; ++i) {
@@ -16,14 +27,7 @@ function OskariMinifier() {
             var content = fs.readFileSync(files[i], 'utf8');
             value = value + '\n' + content;
         }
-        var packed = cssPacker.processString(value);
-
-        fs.writeFile(outputFile, packed, function(err) {
-            if (err) {
-                log('Error writing packed CSS: ' + err);
-            }
-        });
-
+        this.minifyCSS(value, outputFile);
     }
 
     this.minifyLocalization = function(langfiles, path) {
@@ -51,5 +55,22 @@ function OskariMinifier() {
         });
         fs.writeFileSync(outputFile, result.code, 'utf8');
     }
+    
+    this.copyFile = function(srcFile, destFile) {
+      var BUF_LENGTH, buff, bytesRead, fdr, fdw, pos;
+      BUF_LENGTH = 64 * 1024;
+      buff = new Buffer(BUF_LENGTH);
+      fdr = fs.openSync(srcFile, 'r');
+      fdw = fs.openSync(destFile, 'w');
+      bytesRead = 1;
+      pos = 0;
+      while (bytesRead > 0) {
+        bytesRead = fs.readSync(fdr, buff, 0, BUF_LENGTH, pos);
+        fs.writeSync(fdw, buff, 0, bytesRead);
+        pos += bytesRead;
+      }
+      fs.closeSync(fdr);
+      return fs.closeSync(fdw);
+    };
 
 }
